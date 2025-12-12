@@ -153,59 +153,6 @@ export default function QuizApp() {
             </Card>
           </Link>
         </div>
-
-        {!showResult && (
-          <div className="mt-12">
-            <Card className="w-full max-w-2xl">
-              <CardHeader>
-                <div className="flex items-center justify-between mb-4">
-                  <CardDescription>
-                    Question {currentQuestion + 1} of {quizQuestions.length}
-                  </CardDescription>
-                  <CardDescription>
-                    Score: {score}/{quizQuestions.length}
-                  </CardDescription>
-                </div>
-                <Progress value={progressValue} className="mb-4" />
-                <CardTitle className="text-2xl text-balance">{quizQuestions[currentQuestion].question}</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                {quizQuestions[currentQuestion].options.map((option, index) => (
-                  <Button
-                    key={index}
-                    onClick={() => handleAnswerClick(index)}
-                    variant={
-                      answered
-                        ? index === quizQuestions[currentQuestion].correctAnswer
-                          ? "default"
-                          : index === selectedAnswer
-                            ? "destructive"
-                            : "outline"
-                        : "outline"
-                    }
-                    className="w-full justify-start text-left h-auto py-4 px-6 text-base"
-                    disabled={answered}
-                  >
-                    <span className="font-semibold mr-3">{String.fromCharCode(65 + index)}.</span>
-                    {option}
-                  </Button>
-                ))}
-              </CardContent>
-              <CardFooter className="flex justify-between">
-                <div className="text-sm text-muted-foreground">
-                  {answered && (
-                    <span>
-                      {selectedAnswer === quizQuestions[currentQuestion].correctAnswer ? "✅ Correct!" : "❌ Incorrect"}
-                    </span>
-                  )}
-                </div>
-                <Button onClick={handleNextQuestion} disabled={!answered}>
-                  {currentQuestion === quizQuestions.length - 1 ? "Finish" : "Next Question"}
-                </Button>
-              </CardFooter>
-            </Card>
-          </div>
-        )}
       </div>
     </div>
   )
